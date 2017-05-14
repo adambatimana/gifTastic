@@ -1,6 +1,10 @@
 body{
   background: url("../images/seigaiha.png");
+  letter-spacing: .1125em;
 }
 h1{
   color: #FF6D79;
+}
+.panel .panel-heading{
+  background: #336699;
 }

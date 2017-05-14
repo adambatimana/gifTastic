@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
   <title>GifTastic</title>
   <link rel="stylesheet" href="assets/css/reset.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://bootswatch.com/journal/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="https://bootswatch.com/journal/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-<div class="container">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Welcome to The Giftastic World of Gifs</h1>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8">
-
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Welcome to the Giftastic World of Gifs</h1>
+      </div>
     </div>
 
-    <div class="col-md-4">
-    <form class="form-horizontal">
-      <fieldset>
-        <legend>Look Up Gif</legend>
-          <div class="form-group">
-              <div class="col-lg-10">
-                  <input type="text" class="form-control" id="inputEmail" placeholder="Search for Gif Here!">
-              </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well well-lg" id="display_btns">
+          <!-- Search buttons will go in here -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Our Gif's to the World</h3>
           </div>
+          <div class="panel-body" id="display_gifs">
+            <!-- gifs from api will be diplayed here -->
+          </div>
+        </div>
+      </div>
 
-          <div class="form-group">
-            <div class="col-lg-10 ">
-              <button type="submit" class="btn btn-primary" id="searchBtn">Search</button>
+      <div class="col-md-4">
+        <form class="form-horizontal">
+          <fieldset>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search Gif Here!">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" id="searchBtn"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span></button>
+              </span>
             </div>
-          </div>
 
-      </fieldset>
-    </form>
+          </fieldset>
+        </form>
+      </div>
+
     </div>
 
   </div>
-
-</div>
 </body>
+
 </html>
