@@ -1,5 +1,4 @@
-// button class class=btn btn-info
-// url http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC
+
 
 //====================================================================
 //                VARIABLES
@@ -7,12 +6,27 @@
 // create array of topics
 var topics = ["batman", "superman", "flash", "wonderwoman", "captain america", "zoom", "reverse flash", "godspeed"];
 
+
+
+
+//====================================================================
+//                INVOKE FUNCTIONS
+//====================================================================
+setButtons();
+
+
 //====================================================================
 //               AJAX
 //====================================================================
-$("button").on("click", function(){
-  var gifName =  "batman";
 
+
+//on click event lister for each button to add 10 gifs with ratings
+$("button").on("click", function() {
+
+  var gifName =  $(this).attr("data-name");
+  console.log($(this).attr("data-name"));
+  $("#display_gifs").empty();
+  //create ajax call for queryURL
   var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=dc6zaTOxFJmzC&limit=10";
 
   $.ajax({
@@ -20,23 +34,25 @@ $("button").on("click", function(){
     method:"GET"
   }).done(function(response){
     console.log(response.data);
+
     var results = response.data;
 
     for (var i = 0; i < results.length; i++) {
       var gifDiv = $("<div>");
+      gifDiv.addClass("well");
       var gifRate = $("<p>");
       gifRate.text("RATING: " + results[i].rating);
       var gifImage = $("<img>");
-      gifImage.attr("src", results[i].images.fixed_height.url)
+      gifImage.attr("src", results[i].images.original_still.url)
       gifDiv.append(gifRate, gifImage);
-
-      $("#display_gifs").prepend(gifDiv);
+      $("#display_gifs").append(gifDiv);
     }
+
   })
 
 });
 
-//create ajax call for queryURL
+
 
 //====================================================================
 //                FUNCTIONS
@@ -65,9 +81,11 @@ function setButtons(){
 
 
 //on click event listener to add search buttons
-$("#searchBtn").on("click", function(event){
+$("#searchBtn").on("click", function(event) {
 
   event.preventDefault();
+
+  $("#search-input").empty();
 
   //append search topic from search button to add to array
   var topicSearch = $("#search-input").val();
@@ -76,16 +94,12 @@ $("#searchBtn").on("click", function(event){
 
   setButtons();
 
+  $('.form-horizontal').find('input:text').val('');
+
 });
 
-//====================================================================
-//                INVOKE FUNCTIONS
-//====================================================================
-
-setButtons();
 
 
 
-//on click event lister for each button to add 10 gifs with ratings
 
 //on click for pause and animate for each gif
