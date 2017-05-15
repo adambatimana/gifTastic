@@ -5,15 +5,12 @@
 //====================================================================
 // create array of topics
 var topics = ["batman", "superman", "flash", "wonderwoman", "captain america", "zoom", "reverse flash", "godspeed"];
-
-
-
-
+var gifDisplay = $(".gifDisplay");
 //====================================================================
 //                INVOKE FUNCTIONS
 //====================================================================
 setButtons();
-
+gifDisplay.hide();
 
 //====================================================================
 //               AJAX
@@ -33,9 +30,9 @@ $("button").on("click", function() {
     url:queryURL,
     method:"GET"
   }).done(function(response){
-    console.log(response.data);
 
     var results = response.data;
+    //console.log(response.data);
 
     for (var i = 0; i < results.length; i++) {
       var gifDiv = $("<div>");
@@ -49,6 +46,7 @@ $("button").on("click", function() {
     }
 
   })
+  gifDisplay.show();
 
 });
 
@@ -79,7 +77,38 @@ function setButtons(){
 
 }
 
+function displayGif(){
 
+  var gifName =  $(this).attr("data-name");
+  console.log($(this).attr("data-name"));
+  $("#display_gifs").empty();
+  //create ajax call for queryURL
+  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+  $.ajax({
+    url:queryURL,
+    method:"GET"
+  }).done(function(response){
+
+    var results = response.data;
+    //console.log(response.data);
+
+    for (var i = 0; i < results.length; i++) {
+      var gifDiv = $("<div>");
+      gifDiv.addClass("well");
+      var gifRate = $("<p>");
+      gifRate.text("RATING: " + results[i].rating);
+      var gifImage = $("<img>");
+      gifImage.attr("src", results[i].images.original_still.url)
+      gifDiv.append(gifRate, gifImage);
+      $("#display_gifs").append(gifDiv);
+    }
+
+  })
+
+
+
+}
 //on click event listener to add search buttons
 $("#searchBtn").on("click", function(event) {
 
@@ -99,7 +128,7 @@ $("#searchBtn").on("click", function(event) {
 });
 
 
-
+$(document).on("click", ".gif", displayGif)
 
 
 //on click for pause and animate for each gif
