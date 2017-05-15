@@ -12,45 +12,6 @@ var gifDisplay = $(".gifDisplay");
 setButtons();
 gifDisplay.hide();
 
-//====================================================================
-//               AJAX
-//====================================================================
-
-
-//on click event lister for each button to add 10 gifs with ratings
-$("button").on("click", function() {
-
-  var gifName =  $(this).attr("data-name");
-  console.log($(this).attr("data-name"));
-  $("#display_gifs").empty();
-  //create ajax call for queryURL
-  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=dc6zaTOxFJmzC&limit=10";
-
-  $.ajax({
-    url:queryURL,
-    method:"GET"
-  }).done(function(response){
-
-    var results = response.data;
-    //console.log(response.data);
-
-    for (var i = 0; i < results.length; i++) {
-      var gifDiv = $("<div>");
-      gifDiv.addClass("well");
-      var gifRate = $("<p>");
-      gifRate.text("RATING: " + results[i].rating);
-      var gifImage = $("<img>");
-      gifImage.attr("src", results[i].images.original_still.url)
-      gifDiv.append(gifRate, gifImage);
-      $("#display_gifs").append(gifDiv);
-    }
-
-  })
-  gifDisplay.show();
-
-});
-
-
 
 //====================================================================
 //                FUNCTIONS
@@ -77,8 +38,11 @@ function setButtons(){
 
 }
 
-function displayGif(){
 
+function displayGif(){
+  //====================================================================
+  //               AJAX
+  //====================================================================
   var gifName =  $(this).attr("data-name");
   console.log($(this).attr("data-name"));
   $("#display_gifs").empty();
@@ -91,7 +55,7 @@ function displayGif(){
   }).done(function(response){
 
     var results = response.data;
-    //console.log(response.data);
+    console.log(response.data);
 
     for (var i = 0; i < results.length; i++) {
       var gifDiv = $("<div>");
@@ -99,16 +63,19 @@ function displayGif(){
       var gifRate = $("<p>");
       gifRate.text("RATING: " + results[i].rating);
       var gifImage = $("<img>");
+      gifImage.addClass("animate");
       gifImage.attr("src", results[i].images.original_still.url)
+      gifImage.attr("data-state", results[i].images.original_still.url)
+      gifImage.attr("data-animate", results[i].images.fixed_height.url);
       gifDiv.append(gifRate, gifImage);
       $("#display_gifs").append(gifDiv);
     }
 
   })
 
-
-
 }
+
+
 //on click event listener to add search buttons
 $("#searchBtn").on("click", function(event) {
 
@@ -127,8 +94,31 @@ $("#searchBtn").on("click", function(event) {
 
 });
 
+//on click event lister for adding gif to searched item button
 
-$(document).on("click", ".gif", displayGif)
+$(document).on("click", ".gif", displayGif);
 
+//on click event lister for each button to add 10 gifs with ratings
+$("button").on("click", function() {
+  gifDisplay.show();
+
+});
 
 //on click for pause and animate for each gif
+$(".animate").on("click", function() {
+
+  var state = $(this).attr("data-state");
+  if (state === "still") {
+
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+
+  }
+  else {
+
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+
+  }
+
+});
