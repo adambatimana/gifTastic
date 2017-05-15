@@ -6,8 +6,35 @@
 //====================================================================
 // create array of topics
 var topics = ["batman", "superman", "flash", "wonderwoman", "captain america", "zoom", "reverse flash", "godspeed"];
-var gifName = "";
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=dc6zaTOxFJmzC";
+
+//====================================================================
+//               AJAX
+//====================================================================
+$("button").on("click", function(){
+  var gifName =  "batman";
+
+  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+  $.ajax({
+    url:queryURL,
+    method:"GET"
+  }).done(function(response){
+    console.log(response.data);
+    var results = response.data;
+
+    for (var i = 0; i < results.length; i++) {
+      var gifDiv = $("<div>");
+      var gifRate = $("<p>");
+      gifRate.text("RATING: " + results[i].rating);
+      var gifImage = $("<img>");
+      gifImage.attr("src", results[i].images.fixed_height.url)
+      gifDiv.append(gifRate, gifImage);
+
+      $("#display_gifs").prepend(gifDiv);
+    }
+  })
+
+});
 
 //create ajax call for queryURL
 
@@ -24,9 +51,13 @@ function setButtons(){
   for (var i = 0; i < topics.length; i++) {
     //create buttons for each array item with bootstrap class
     var btn = $("<button>");
+
     btn.addClass("gif btn btn-info");
+
     btn.attr("data-name",topics[i]);
+
     btn.text(topics[i]);
+
     $("#display_btns").append(btn);
   }
 
@@ -38,6 +69,7 @@ $("#searchBtn").on("click", function(event){
 
   event.preventDefault();
 
+  //append search topic from search button to add to array
   var topicSearch = $("#search-input").val();
 
   topics.push(topicSearch);
@@ -52,7 +84,7 @@ $("#searchBtn").on("click", function(event){
 
 setButtons();
 
-//append search topic from search button to add to array
+
 
 //on click event lister for each button to add 10 gifs with ratings
 
