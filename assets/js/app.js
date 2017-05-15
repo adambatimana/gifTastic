@@ -1,11 +1,14 @@
 
+window.onload = function(){
 
 //====================================================================
 //                VARIABLES
 //====================================================================
 // create array of topics
-var topics = ["batman", "superman", "flash", "wonderwoman", "captain america", "zoom", "reverse flash", "godspeed"];
+var topics = ["batman", "superman", "the flash", "wonderwoman", "captain america", "professor zoom", "reverse flash", "jay garrick"];
 var gifDisplay = $(".gifDisplay");
+
+
 //====================================================================
 //                INVOKE FUNCTIONS
 //====================================================================
@@ -63,62 +66,97 @@ function displayGif(){
       var gifRate = $("<p>");
       gifRate.text("RATING: " + results[i].rating);
       var gifImage = $("<img>");
-      gifImage.addClass("animate");
       gifImage.attr("src", results[i].images.original_still.url)
-      gifImage.attr("data-state", results[i].images.original_still.url)
-      gifImage.attr("data-animate", results[i].images.fixed_height.url);
+      gifImage.attr("data-state", "still").attr("data-still", results[i].images.original_still.url).attr("data-animate", results[i].images.fixed_height.url);
+      gifImage.addClass("gifStart");
       gifDiv.append(gifRate, gifImage);
       $("#display_gifs").append(gifDiv);
     }
 
-  })
+    //on click for pause and animate for each gif
+    $(".gifStart").on("click", function(event) {
 
-}
+        var state = $(this).attr("data-state");
+        console.log(state);
+        if (state === "still") {
+
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+
+        }
+        else {
+
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
+
+        }
+
+    });//end click to start and stop gif
+  })//end ajax call
+
+}//end displaygif function
 
 
 //on click event listener to add search buttons
 $("#searchBtn").on("click", function(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  $("#search-input").empty();
+    $("#search-input").empty();
 
-  //append search topic from search button to add to array
-  var topicSearch = $("#search-input").val();
+    //append search topic from search button to add to array
+    var topicSearch = $("#search-input").val();
 
-  topics.push(topicSearch);
+    topics.push(topicSearch);
 
-  setButtons();
+    setButtons();
 
-  $('.form-horizontal').find('input:text').val('');
+    $('.form-horizontal').find('input:text').val('');
 
-});
+});//end searchBtn on click
+
+
 
 //on click event lister for adding gif to searched item button
-
 $(document).on("click", ".gif", displayGif);
+
+
 
 //on click event lister for each button to add 10 gifs with ratings
 $("button").on("click", function() {
-  gifDisplay.show();
 
-});
+    gifDisplay.show();
 
-//on click for pause and animate for each gif
-$(".animate").on("click", function() {
+});//end on click listner for button
 
-  var state = $(this).attr("data-state");
-  if (state === "still") {
 
-    $(this).attr("src", $(this).attr("data-animate"));
-    $(this).attr("data-state", "animate");
 
-  }
-  else {
 
-    $(this).attr("src", $(this).attr("data-still"));
-    $(this).attr("data-state", "still");
 
-  }
 
-});
+
+
+//back to top function
+if ($('#back-to-top').length) {
+    var scrollTrigger = 100, // px
+        backToTop = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > scrollTrigger) {
+                $('#back-to-top').addClass('show');
+            } else {
+                $('#back-to-top').removeClass('show');
+            }
+        };
+    backToTop();
+    $(window).on('scroll', function () {
+        backToTop();
+    });
+    $('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    });
+}//end back to top
+
+}//end window onload
