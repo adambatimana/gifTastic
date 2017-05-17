@@ -5,6 +5,12 @@ body{
 h1{
   color: #FF6D79;
 }
+h2{
+  color:#8CCC2C;
+}
+h3{
+  text-align: center;
+}
 .panel .panel-heading{
   background: #336699;
 }
@@ -18,10 +24,15 @@ img{
 .well{
   margin: 1em auto;
 }
+.col-md-4{
+  margin-top: 2em;
+}
 #back-to-top .glyphicon{
   font-size: 2em;
 }
-
+#display_btns{
+  text-align: center;
+}
 #back-to-top {
     position: fixed;
     bottom: 40px;
@@ -31,7 +42,6 @@ img{
     height: 32px;
     text-align: center;
     line-height: 30px;
-    background: #f5f5f5;
     color: #444;
     cursor: pointer;
 }

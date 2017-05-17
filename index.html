@@ -18,9 +18,25 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-12">
+
+      <div class="col-md-8">
         <h1>Welcome to the Giftastic World of Gifs</h1>
+        <h2>Click a button below or search for gif</h2>
       </div>
+
+      <div class="col-md-4">
+        <form class="form-horizontal">
+          <fieldset>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search Gif Here!" id="search-input">
+              <span class="input-group-btn">
+                  <a href="#" class="btn btn-primary" id="searchBtn"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span></a>
+              </span>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
     </div>
 
     <div class="row">
@@ -32,39 +48,26 @@
     </div>
 
     <div class="row">
-
       <div class="gifDisplay">
 
-
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title">Our Gif's to the World</h3>
           </div>
-          <div class="panel-body" id="display_gifs">
-            <!-- gifs from api will be diplayed here -->
+          <div class="panel-body">
+            <h3>Click on image to start or stop gif.</h3>
+            <div id="display_gifs">
+              <!-- gifs from api will be diplayed here -->
+
+            </div>
           </div>
         </div>
       </div>
 
-
-
-      <div class="col-md-4">
-        <form class="form-horizontal">
-          <fieldset>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search Gif Here!" id="search-input">
-              <span class="input-group-btn">
-                  <a href="#" class="btn btn-primary" id="searchBtn"><span class="glyphicon glyphicon-search" aria-hidden="true" ></span></a>
-              </span>
-            </div>
-
-          </fieldset>
-        </form>
       </div>
+    </div>
 
-    </div>
-    </div>
   </div>
   <script src="assets/js/app.js"></script>
   <a href="#" id="back-to-top" title="Back to top"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></a>

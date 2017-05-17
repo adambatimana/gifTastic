@@ -5,7 +5,7 @@ window.onload = function(){
 //                VARIABLES
 //====================================================================
 // create array of topics
-var topics = ["batman", "superman", "the flash", "wonderwoman", "captain america", "professor zoom", "reverse flash", "jay garrick"];
+var topics = ["batman", "superman", "the flash", "wonderwoman", "captain america", "professor zoom", "reverse flash", "jay garrick", "wolverine", "deadpool", "captain cold", "legends of tomorrow", "green arrow", "spiderman", "boba fett", "ahsoka", "supreme", "bape", "adidas"];
 var gifDisplay = $(".gifDisplay");
 
 
@@ -50,7 +50,7 @@ function displayGif(){
   console.log($(this).attr("data-name"));
   $("#display_gifs").empty();
   //create ajax call for queryURL
-  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=dc6zaTOxFJmzC&limit=10";
+  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=dc6zaTOxFJmzC&limit=10";
 
   $.ajax({
     url:queryURL,
